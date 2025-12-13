@@ -70,6 +70,18 @@ if st.button("Prediksi Produksi"):
     st.subheader("Hasil Prediksi")
     st.success(f"Perkiraan Produksi Padi: **{prediction[0]:,.2f}**")
 
+    # =============================
+    # Grafik Prediksi
+    # =============================
+    st.subheader("Grafik Hasil Prediksi")
+
+    chart_df = pd.DataFrame({
+        "Keterangan": ["Produksi Padi"],
+        "Nilai": [prediction[0]]
+    })
+
+    st.bar_chart(chart_df.set_index("Keterangan"))
+
 # =============================
 # Informasi Model
 # =============================
