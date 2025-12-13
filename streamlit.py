@@ -50,7 +50,12 @@ st.info(f"Model ini mengharapkan **{expected_features} fitur** sebagai input.")
 
 input_values = []
 for i in range(expected_features):
-    label = features[i] if i < len(features) else f"fitur_{i+1}"
+    # Ganti label fitur ke-4 menjadi "Produktivitas"
+    if i == 3:
+        label = "produktivitas"
+    else:
+        label = features[i] if i < len(features) else f"fitur_{i+1}"
+
     value = st.number_input(label.replace('_', ' ').title(), min_value=0.0)
     input_values.append(value)
 
