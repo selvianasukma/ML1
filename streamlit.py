@@ -60,11 +60,22 @@ if st.button("Prediksi Produksi"):
 # =============================
 st.header("Informasi Model")
 
+# Aman dari error panjang tidak sama
 if hasattr(model, "coef_"):
+    coef = model.coef_
+
+    # Jika koefisien 2D (misalnya multi-output), ambil baris pertama
+    if len(coef.shape) > 1:
+        coef = coef[0]
+
+    # Samakan panjang fitur dan koefisien
+    min_len = min(len(features), len(coef))
+
     coef_df = pd.DataFrame({
-        "Fitur": features,
-        "Koefisien": model.coef_
+        "Fitur": features[:min_len],
+        "Koefisien": coef[:min_len]
     })
+
     st.table(coef_df)
     st.write("**Intercept:**", model.intercept_)
 else:
