@@ -68,7 +68,7 @@ if st.button("Prediksi Produksi"):
     prediction = model.predict(input_array)
 
     st.subheader("Hasil Prediksi")
-    st.success(f"Perkiraan Produksi Padi: **{prediction[0]:,.2f}**")
+    st.success(f"Perkiraan Produksi Padi: **{prediction[0]:,.2f}** TON")
 
     # =============================
     # Grafik Prediksi
@@ -109,3 +109,4 @@ else:
     st.info("Informasi koefisien tidak tersedia untuk model ini")
 
 st.caption("Model dilatih di Jupyter Notebook dan hanya di-load di Streamlit (tanpa training ulang).")
+
