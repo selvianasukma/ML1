@@ -38,15 +38,25 @@ except Exception as e:
 # Input Prediksi
 # =============================
 st.header("Input Data")
-st.write("Masukkan nilai sesuai variabel yang digunakan saat training model.")
+st.write("Masukkan nilai sesuai **jumlah fitur saat model dilatih**.")
+
+# Ambil jumlah fitur yang diharapkan model
+if hasattr(model, "n_features_in_"):
+    expected_features = model.n_features_in_
+else:
+    expected_features = len(features)
+
+st.info(f"Model ini mengharapkan **{expected_features} fitur** sebagai input.")
 
 input_values = []
-for feature in features:
-    value = st.number_input(f"{feature.replace('_', ' ').title()}", min_value=0.0)
+for i in range(expected_features):
+    label = features[i] if i < len(features) else f"fitur_{i+1}"
+    value = st.number_input(label.replace('_', ' ').title(), min_value=0.0)
     input_values.append(value)
 
 # =============================
 # Prediksi
+
 # =============================
 if st.button("Prediksi Produksi"):
     input_array = np.array([input_values])
